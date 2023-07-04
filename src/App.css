@@ -1,38 +1,95 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+button {
+  background: none;
+  border: none;
+}
+
 .App {
-  text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+  background-color: #E8EAF6;
+  width: 100vw;
+  height: 100dvh;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  justify-content: space-around;
 }
 
-.App-link {
-  color: #61dafb;
+#setting {
+  width: 80%;
+  height: 30%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+}
+#setting div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+#setting div div {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+#setting div div p {
+  font-size: 20px;
+  margin: 10px;
+  font-weight: 500;
+}
+#setting div div button {
+  width: auto;
+  font-size: 20px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+#counter {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 80%;
+  height: 40%;
+  justify-content: space-evenly;
+  border-radius: 20px;
+  background-color: #C5CAE9;
 }
+#counter div {
+  width: 90%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+}
+
+#control {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 80%;
+  height: 30%;
+  align-items: center;
+  justify-content: space-between;
+}
+#control button {
+  margin: 20px;
+}
+
+@media (min-width: 425px) {
+  .App {
+    background-color: #E8EAF6;
+    width: 425px;
+    height: 500px;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: auto;
+    padding: auto 7vw;
+  }
+}/*# sourceMappingURL=App.css.map */

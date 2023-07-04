@@ -1,0 +1,95 @@
+$font: auto;
+$digit-size: 20px;
+$digit-weigth: 500;
+$primary-color: #E8EAF6;
+$secondary-color: #C5CAE9;
+$brand-color: #1A237E;
+
+* {
+    margin:0;
+    padding: 0;
+    box-sizing: border-box;
+}
+button {
+    background: none;
+    border: none;
+}
+@mixin col {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+@mixin row {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+@mixin setrow {
+    align-items: center;
+    justify-content: space-between;
+}
+.App {
+    background-color: $primary-color;
+    width: 100vw;
+    height: 100dvh;
+    @include col;
+    justify-content: space-around;
+}
+#setting {
+    width: 80%;
+    height: 30%;
+    @include row;
+    @include setrow;
+
+    div {
+        @include col;
+        div {
+            @include row;
+            p {
+                font-size: $digit-size;
+                margin: 10px;
+                font-weight: $digit-weigth;
+            }
+            button {
+                width: auto;
+                font-size: $digit-size;
+            }
+        }
+    }
+}
+#counter {
+    @include col;
+    width: 80%;
+    height: 40%;
+    justify-content: space-evenly;
+    border-radius: 20px;
+    background-color: $secondary-color;
+
+    div {
+        width: 90%;
+        @include row;
+        @include setrow;
+    }
+}
+#control {
+    @include row;
+    width: 80%;
+    height: 30%;
+    align-items: center;
+    justify-content: space-between;
+    button {
+        margin: 20px;
+    }
+}
+
+@media (min-width: 425px) {
+    .App {
+        background-color: $primary-color;
+        width: 425px;
+        height: 500px;
+        border-radius: 20px;
+        @include col;
+        margin: auto;
+        padding: auto 7vw;
+    }
+}
