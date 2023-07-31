@@ -9,6 +9,9 @@ const breakLengthReducer = (state = 5, action) => {
         case 'DECBREAK':
             return state - 1;
             break;
+        case 'RESET':
+            return action.defaultBreakLength;
+            break;
         default:
             return state;
             break;
@@ -22,38 +25,37 @@ const sessionLengthReducer = (state = 25, action) => {
         case 'DECSESSION':
             return state - 1;
             break;
+        case 'RESET':
+            return action.defaultSessionLength;
+            break;
         default: 
             return state;
             break;
     }
 }
 
-const breakReducer = (state = 5, action) => {
-    return state;
-}
-const sessionReducer = (state = 25, action) => {
-    return state
-}
-const timeReducer = (state=25, action) => {
-    //const countDown = action.countDown * 60 * 1000;
+const breakReducer = (state = 5*60, action) => {
     switch(action.type) {
-        case 'START':
-            //setInterval(()=> {return state-1}, 3000);
-            return state-1;
-            break;
-        case 'PAUSE':
-            return state;
+        case 'COUNTBREAK':
+            return action.payload;
+        case 'SETBREAK':
+            return action.payload;
+        case 'RESET':
+            return action.defaultBreakCount;
             break;
         default:
             return state;
     }
 }
-const playPauseReducer = (state=false, action) => {
+const sessionReducer = (state = 25*60, action) => {
     switch(action.type) {
-        case 'START':
-            return !state;
-        case 'PAUSE':
-            return !state;
+        case 'COUNTSESSION':
+            return action.payload;
+        case 'SETSESSION':
+            return action.payload;
+        case 'RESET':
+            return action.defaultSessionCount;
+            break;
         default:
             return state;
     }
@@ -64,8 +66,6 @@ const allReducers = combineReducers({
     sessionLength: sessionLengthReducer,
     break: breakReducer,
     session: sessionReducer,
-    count: timeReducer,
-    playPause: playPauseReducer,
 })
 
 const store = createStore(allReducers);
