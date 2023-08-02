@@ -52,7 +52,7 @@ function App() {
           type:'COUNTSESSION',
           payload:sessionDuration,
         })
-        if(sessionDuration <= 0){
+        if(sessionDuration < 0){
           clearInterval(interval);
         }
       }
@@ -64,13 +64,10 @@ function App() {
           type:'COUNTBREAK',
           payload:breakDuration,
         })
-        if(breakDuration===0){
+        if(breakDuration<0){
           clearInterval(interval);
-          dispatch({
-            type: 'RESET',
-            defaultSessionCount: 25*60,
-            defaultBreakCount: 5*60
-          })
+          dispatch({type:'SETSESSION', payload:sessionLength*60})
+          dispatch({type:'SETBREAK', payload:breakLength*60})
         }
       }
     }
@@ -123,7 +120,7 @@ function App() {
       <div id='counter'>
         <div>
           <img src={TimerIcon} alt='timer icon'/>
-          <p id="timer-label">Session/Break</p>
+          <p id="timer-label">{sessionCount>=0?"Session":"Break"}</p>
         </div>
         <div>
           <p>Time Left</p>
