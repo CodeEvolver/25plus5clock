@@ -38,8 +38,10 @@ const breakReducer = (state = 5*60, action) => {
     switch(action.type) {
         case 'COUNTBREAK':
             return action.payload;
+            break;
         case 'SETBREAK':
             return action.payload;
+            break;
         case 'RESET':
             return action.defaultBreakCount;
             break;
@@ -51,8 +53,10 @@ const sessionReducer = (state = 25*60, action) => {
     switch(action.type) {
         case 'COUNTSESSION':
             return action.payload;
+            break;
         case 'SETSESSION':
             return action.payload;
+            break;
         case 'RESET':
             return action.defaultSessionCount;
             break;
