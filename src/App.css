@@ -20,18 +20,26 @@ button {
 }
 
 #setting {
-  width: 80%;
-  height: 30%;
+  width: 90%;
+  height: auto;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
+  border-radius: 20px;
+  background-color: #C5CAE9;
+  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.5);
+  padding: 10px;
 }
 #setting div {
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+#setting div p {
+  font-size: 20px;
+  font-weight: 500;
 }
 #setting div div {
   display: flex;
@@ -40,23 +48,25 @@ button {
 }
 #setting div div p {
   font-size: 20px;
-  margin: 10px;
   font-weight: 500;
+  margin: 10px;
 }
 #setting div div button {
   width: auto;
   font-size: 20px;
+  font-weight: 500;
 }
 
 #counter {
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 80%;
+  width: 90%;
   height: 40%;
   justify-content: space-evenly;
   border-radius: 20px;
   background-color: #C5CAE9;
+  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.5);
 }
 #counter div {
   width: 90%;
@@ -66,15 +76,23 @@ button {
   align-items: center;
   justify-content: space-between;
 }
+#counter div p {
+  font-size: 20px;
+  font-weight: 500;
+}
 
 #control {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  width: 80%;
-  height: 30%;
+  width: 90%;
+  height: -moz-fit-content;
+  height: fit-content;
   align-items: center;
   justify-content: space-between;
+  border-radius: 20px;
+  background-color: #C5CAE9;
+  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.5);
 }
 #control button {
   margin: 20px;
@@ -84,12 +102,25 @@ button {
   .App {
     background-color: #E8EAF6;
     width: 425px;
-    height: 500px;
-    border-radius: 20px;
+    height: 100dvh;
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin: auto;
+    margin: auto auto;
+    padding: auto 7vw;
+    border-radius: 20px;
+    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.5);
+  }
+}
+@media (min-width: 768px) {
+  .App {
+    background-color: #E8EAF6;
+    width: 425px;
+    height: 100dvh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: auto auto;
     padding: auto 7vw;
   }
 }/*# sourceMappingURL=App.css.map */

@@ -1,5 +1,6 @@
 $font: auto;
 $digit-size: 20px;
+$letter-size: 25px;
 $digit-weigth: 500;
 $primary-color: #E8EAF6;
 $secondary-color: #C5CAE9;
@@ -36,47 +37,67 @@ button {
     justify-content: space-around;
 }
 #setting {
-    width: 80%;
-    height: 30%;
+    width: 90%;
+    height: auto;
     @include row;
     @include setrow;
+    border-radius: 20px;
+    background-color: $secondary-color;
+    box-shadow: 0px 0px 4px rgba(0,0,0,0.5);
+    padding: 10px;
 
     div {
         @include col;
+        p {
+            font-size: $digit-size;
+            font-weight: $digit-weigth;
+        }
         div {
             @include row;
+
             p {
                 font-size: $digit-size;
-                margin: 10px;
                 font-weight: $digit-weigth;
+                margin: 10px;
             }
             button {
                 width: auto;
                 font-size: $digit-size;
+                font-weight: $digit-weigth;
             }
         }
     }
 }
 #counter {
     @include col;
-    width: 80%;
+    width: 90%;
     height: 40%;
     justify-content: space-evenly;
     border-radius: 20px;
     background-color: $secondary-color;
+    box-shadow: 0px 0px 4px rgba(0,0,0,0.5);
 
     div {
         width: 90%;
         @include row;
         @include setrow;
+
+        p {
+            font-size: $digit-size;
+            font-weight: $digit-weigth;
+        }
     }
 }
 #control {
     @include row;
-    width: 80%;
-    height: 30%;
+    width: 90%;
+    height: fit-content;
     align-items: center;
     justify-content: space-between;
+    border-radius: 20px;
+    background-color: $secondary-color;
+    box-shadow: 0px 0px 4px rgba(0,0,0,0.5);
+
     button {
         margin: 20px;
     }
@@ -86,10 +107,21 @@ button {
     .App {
         background-color: $primary-color;
         width: 425px;
-        height: 500px;
-        border-radius: 20px;
+        height: 100dvh;
         @include col;
-        margin: auto;
+        margin: auto auto;
+        padding: auto 7vw;
+        border-radius: 20px;
+        box-shadow: 0px 0px 4px rgba(0,0,0,0.5);
+    }
+}
+@media (min-width: 768px) {
+    .App {
+        background-color: $primary-color;
+        width: 425px;
+        height: 100dvh;
+        @include col;
+        margin: auto auto;
         padding: auto 7vw;
     }
 }
