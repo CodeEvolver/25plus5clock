@@ -1,7 +1,7 @@
 import './App.css';
 
 //React and Redux APIs
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 // Icons to be used in the UI
@@ -24,6 +24,9 @@ function App() {
   //To keep track of the number of session and break rounds
   const [breakRound, setBreakRound] = useState(0);
   const [sessionRound, setSessionRound] = useState(0);
+
+  //To refrence the audio in my jsx
+  const audioRef = useRef(null);
 
   const dispatch = useDispatch();
 
@@ -67,19 +70,28 @@ function App() {
   }, [dispatch, sessionLength]) //isPaused not included in the dependency array to avoid unecessary renders
 
   //To restart the timer when countdow finishes
-  const restart = () => {
+  const restart = useCallback(() => {
     //dispatch actions that resets the session an break counts to the initial state
     dispatch({type:'SETSESSION', payload:sessionLength*60})
     dispatch({type:'SETBREAK', payload:breakLength*60})
-  }
+  }, [dispatch,sessionLength, breakLength])
 
   //To check if the timer should be in session or on break
-  const inSession = () => {
+  const inSession = useCallback(() => {
     if(breakRound === sessionRound) {
       return true;
     } else {
       return false;
     }
+  }, [sessionRound, breakRound])
+
+  const beep = useCallback(() => {
+    audioRef.current.play();
+  }, [audioRef])
+
+  const rewoundAudio = () => {
+    audioRef.current.pause();
+    audioRef.current.currentTime = 0;
   }
 
   //Handles the countdown and timer updates
@@ -95,9 +107,10 @@ function App() {
           type:'COUNTSESSION',
           payload:sessionDuration,
         })
-        if(sessionDuration < 0){
+        if(sessionDuration <= 0){
           clearInterval(interval);
-          setSessionRound((prevSessionRound) => prevSessionRound+1)
+          setSessionRound((prevSessionRound) => prevSessionRound+1);
+          beep();
         }
       }
     }
@@ -108,9 +121,10 @@ function App() {
           type:'COUNTBREAK',
           payload:breakDuration,
         })
-        if(breakDuration<0){
+        if(breakDuration <= 0){
           clearInterval(interval);
           setBreakRound((prevBreakRound) => prevBreakRound+1)
+          beep();
           restart();
         }
       }
@@ -123,7 +137,7 @@ function App() {
       interval = setInterval(updateBreakCount, 1000);
     }
     return ()=> clearInterval(interval);
-  }, [isPaused, inSession, sessionCount, breakCount, dispatch, breakRound, sessionRound, restart])
+  }, [isPaused, inSession, sessionCount, breakCount, dispatch, breakRound, sessionRound, beep, restart])
 
   //Timer Display Format
   const timeDisplay = (seconds) => {
@@ -140,6 +154,9 @@ function App() {
       defaultBreakCount: 5*60
     })
     setIsPaused(true); //Pauses the timer on reset
+    setSessionRound(0);
+    setBreakRound(0);
+    rewoundAudio();
   }
 
 
@@ -172,7 +189,7 @@ function App() {
           <p>Time Left</p>
           <p id="time-left">{inSession()?timeDisplay(sessionCount): timeDisplay(breakCount)}</p>
         </div>
-        <audio id='beep' src={Beep}></audio>
+        <audio ref={audioRef} id='beep' src={Beep}></audio>
       </div>
       <div id='control'>
         <button id="start_stop" onClick={()=> setIsPaused((prevIsPaused)=> !prevIsPaused)}><img src={isPaused? StartIcon: PauseIcon} alt="start or pause"/></button>
