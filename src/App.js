@@ -20,6 +20,7 @@ import Beep from './Assets/mixkit-alarm-clock-beep-988.wav';
 function App() {
   //To track if the timer is paused or playing
   const [isPaused, setIsPaused] = useState(true);
+  const [inSession, setInSession] = useState(true);
 
   //To keep track of the number of session and break rounds
   const [breakRound, setBreakRound] = useState(0);
@@ -77,13 +78,13 @@ function App() {
   }, [dispatch,sessionLength, breakLength])
 
   //To check if the timer should be in session or on break
-  const inSession = useCallback(() => {
+  useEffect(()=> {
     if(breakRound === sessionRound) {
-      return true;
+      setInSession(true);
     } else {
-      return false;
+      setInSession(false);
     }
-  }, [sessionRound, breakRound])
+  }, [setInSession, sessionRound, breakRound]);
 
   const beep = useCallback(() => {
     audioRef.current.play();
@@ -121,16 +122,16 @@ function App() {
           type:'COUNTBREAK',
           payload:breakDuration,
         })
-        if(breakDuration <= 0){
+        if(breakDuration < 0){
           clearInterval(interval);
-          setBreakRound((prevBreakRound) => prevBreakRound+1)
+          setBreakRound((prevBreakRound) => prevBreakRound+1);
           beep();
           restart();
         }
       }
     }
 
-    if(inSession()) {
+    if(inSession) {
       interval = setInterval(updateSessionCount, 1000);
     }
     else {
@@ -183,11 +184,11 @@ function App() {
       <div id='counter'>
         <div>
           <img src={TimerIcon} alt='timer icon'/>
-          <p id="timer-label">{inSession()?"Session":"Break"}</p>
+          <p id="timer-label">{inSession?"Session":"Break"}</p>
         </div>
         <div>
           <p>Time Left</p>
-          <p id="time-left">{inSession()?timeDisplay(sessionCount): timeDisplay(breakCount)}</p>
+          <p id="time-left">{inSession?timeDisplay(sessionCount): timeDisplay(breakCount)}</p>
         </div>
         <audio ref={audioRef} id='beep' src={Beep}></audio>
       </div>
