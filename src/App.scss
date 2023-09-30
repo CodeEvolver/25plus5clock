@@ -2,6 +2,7 @@ $font: auto;
 $digit-size: 20px;
 $letter-size: 25px;
 $digit-weigth: 500;
+$letter-weight: 300;
 $primary-color: #E8EAF6;
 $secondary-color: #C5CAE9;
 $brand-color: #1A237E;
@@ -38,7 +39,7 @@ button {
 }
 #setting {
     width: 90%;
-    height: auto;
+    height: 20%;
     @include row;
     @include setrow;
     border-radius: 20px;
@@ -62,8 +63,6 @@ button {
             }
             button {
                 width: auto;
-                font-size: $digit-size;
-                font-weight: $digit-weigth;
             }
         }
     }
@@ -72,20 +71,22 @@ button {
     @include col;
     width: 90%;
     height: 40%;
-    justify-content: space-evenly;
+    justify-content: space-around;
+    align-content: center;
+    //align-content: space-between;
     border-radius: 20px;
     background-color: $secondary-color;
     box-shadow: 0px 0px 4px rgba(0,0,0,0.5);
-
-    div {
-        width: 90%;
-        @include row;
-        @include setrow;
-
-        p {
-            font-size: $digit-size;
-            font-weight: $digit-weigth;
-        }
+    p {
+        width: auto;
+        height: auto;
+        margin: 10% auto;
+        text-align: center;
+        font-weight: $digit-weigth;
+    }
+    #time-left {
+        font-size: xxx-large;
+        font-weight: $digit-weigth;
     }
 }
 #control {

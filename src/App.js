@@ -72,7 +72,7 @@ function App() {
 
   //To restart the timer when countdow finishes
   const restart = useCallback(() => {
-    //dispatch actions that resets the session an break counts to the initial state
+    //dispatch actions that resets the session and break counts to the initial state
     dispatch({type:'SETSESSION', payload:sessionLength*60})
     dispatch({type:'SETBREAK', payload:breakLength*60})
   }, [dispatch,sessionLength, breakLength])
@@ -103,29 +103,43 @@ function App() {
 
     const updateSessionCount = () => {
       if(!isPaused) {
-        sessionDuration-=1;
+        console.log(sessionDuration, "before");
+        sessionDuration>0 && (sessionDuration-=1);
+        console.log(sessionDuration, "after");
         dispatch({
           type:'COUNTSESSION',
           payload:sessionDuration,
         })
-        if(sessionDuration <= 0){
+        console.log(sessionCount, "display")
+        /*if(sessionDuration === 0){
           clearInterval(interval);
-          setSessionRound((prevSessionRound) => prevSessionRound+1);
           beep();
+          //setSessionRound(sessionRound+1);
+        }*/
+        if(sessionCount === 0){
+          clearInterval(interval);
+          beep();
+          setSessionRound(sessionRound+1);
         }
       }
     }
     const updateBreakCount = () => {
       if(!isPaused) {
-        breakDuration-=1;
+        console.log(breakDuration, "before");
+        breakDuration>0 && (breakDuration-=1);
+        console.log(breakDuration, "after");
         dispatch({
           type:'COUNTBREAK',
           payload:breakDuration,
         })
-        if(breakDuration < 0){
+        console.log(breakCount, "display");
+        /*if(breakDuration === 0){
+          setBreakRound(breakRound+1);
+        }*/
+        if(breakCount===0) {
           clearInterval(interval);
-          setBreakRound((prevBreakRound) => prevBreakRound+1);
           beep();
+          setBreakRound(breakRound+1);
           restart();
         }
       }
@@ -183,12 +197,9 @@ function App() {
       </div>
       <div id='counter'>
         <div>
-          <img src={TimerIcon} alt='timer icon'/>
           <p id="timer-label">{inSession?"Session":"Break"}</p>
-        </div>
-        <div>
-          <p>Time Left</p>
           <p id="time-left">{inSession?timeDisplay(sessionCount): timeDisplay(breakCount)}</p>
+          <p>Time Left</p>
         </div>
         <audio ref={audioRef} id='beep' src={Beep}></audio>
       </div>

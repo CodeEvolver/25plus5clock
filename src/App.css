@@ -21,7 +21,7 @@ button {
 
 #setting {
   width: 90%;
-  height: auto;
+  height: 20%;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -53,8 +53,6 @@ button {
 }
 #setting div div button {
   width: auto;
-  font-size: 20px;
-  font-weight: 500;
 }
 
 #counter {
@@ -63,21 +61,21 @@ button {
   align-items: center;
   width: 90%;
   height: 40%;
-  justify-content: space-evenly;
+  justify-content: space-around;
+  align-content: center;
   border-radius: 20px;
   background-color: #C5CAE9;
   box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.5);
 }
-#counter div {
-  width: 90%;
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: space-between;
+#counter p {
+  width: auto;
+  height: auto;
+  margin: 10% auto;
+  text-align: center;
+  font-weight: 500;
 }
-#counter div p {
-  font-size: 20px;
+#counter #time-left {
+  font-size: xxx-large;
   font-weight: 500;
 }
 
