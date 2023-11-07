@@ -114,9 +114,10 @@ function App() {
         
         if(sessionCount === 0){
           clearInterval(interval);
-          beep();
+          //beep();
           setSessionRound(sessionRound+1);
         }
+        sessionDuration===0 && beep();
       }
     }
     const updateBreakCount = () => {
@@ -130,11 +131,12 @@ function App() {
         })
         //console.log(breakCount, "display");
         if(breakCount===0) {
-          beep();
+          //beep();
           clearInterval(interval);
           setBreakRound(breakRound+1);
           restart();
         }
+        breakDuration===0 && beep();
       }
     }
 
