@@ -103,19 +103,15 @@ function App() {
 
     const updateSessionCount = () => {
       if(!isPaused) {
-        console.log(sessionDuration, "before");
+        //console.log(sessionDuration, "before");
         sessionDuration>0 && (sessionDuration-=1);
-        console.log(sessionDuration, "after");
+        //console.log(sessionDuration, "after");
         dispatch({
           type:'COUNTSESSION',
           payload:sessionDuration,
         })
-        console.log(sessionCount, "display")
-        /*if(sessionDuration === 0){
-          clearInterval(interval);
-          beep();
-          //setSessionRound(sessionRound+1);
-        }*/
+        //console.log(sessionCount, "display")
+        
         if(sessionCount === 0){
           clearInterval(interval);
           beep();
@@ -125,20 +121,17 @@ function App() {
     }
     const updateBreakCount = () => {
       if(!isPaused) {
-        console.log(breakDuration, "before");
+        //console.log(breakDuration, "before");
         breakDuration>0 && (breakDuration-=1);
-        console.log(breakDuration, "after");
+        //console.log(breakDuration, "after");
         dispatch({
           type:'COUNTBREAK',
           payload:breakDuration,
         })
-        console.log(breakCount, "display");
-        /*if(breakDuration === 0){
-          setBreakRound(breakRound+1);
-        }*/
+        //console.log(breakCount, "display");
         if(breakCount===0) {
-          clearInterval(interval);
           beep();
+          clearInterval(interval);
           setBreakRound(breakRound+1);
           restart();
         }
